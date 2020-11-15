@@ -638,12 +638,12 @@ class chunkbuffer(object):
 
 
 class HTTPReader(object):
-    def __init__(self, url, disable_ssl):
+    def __init__(self, url, *args):
         url = fsdecode(url)
 
         ctx = ssl.create_default_context()
 
-        if disable_ssl:
+        if args.disable_ssl:
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
 
