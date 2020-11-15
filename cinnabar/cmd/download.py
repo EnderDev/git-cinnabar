@@ -33,9 +33,8 @@ except ImportError:
 @CLI.subcommand
 @CLI.argument('--url', action='store_true',
               help='only print the download url')
-@CLI.argument('--secure', nargs='?', metavar='VARIANT',
-              default=True,
-              help='use ssl when downloading helper')
+@CLI.argument('--disable-ssl', action='store_true',
+              help='disable ssl when downloading helper')
 @CLI.argument('--dev', nargs='?', metavar='VARIANT',
               default=False,
               help='download the development helper')
