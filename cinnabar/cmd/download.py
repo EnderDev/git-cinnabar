@@ -134,11 +134,11 @@ def download(args):
 
     print('Downloading from %s...' % url)
     try:
-        reader = HTTPReader(url, args.secure)
+        reader = HTTPReader(url, args['disable-ssl'])
     except HTTPError:
         # Try again, just in case
         try:
-            reader = HTTPReader(url, args.secure)
+            reader = HTTPReader(url, args['disable-ssl'])
         except HTTPError as e:
             print('Download failed with status code %d\n' % e.code,
                   file=sys.stderr)
