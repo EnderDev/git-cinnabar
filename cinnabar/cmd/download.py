@@ -50,6 +50,8 @@ except ImportError:
 def download(args):
     '''download a prebuilt helper'''
 
+    print(args)
+
     helper = 'git-cinnabar-helper'
     system = args.system
     machine = args.machine
