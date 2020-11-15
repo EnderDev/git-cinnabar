@@ -638,7 +638,7 @@ class chunkbuffer(object):
 
 
 class HTTPReader(object):
-    def __init__(self, url, *args):
+    def __init__(self, url, disable_ssl=False):
         url = fsdecode(url)
 
         ctx = ssl.create_default_context()
