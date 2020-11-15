@@ -50,8 +50,6 @@ except ImportError:
 def download(args):
     '''download a prebuilt helper'''
 
-    print(args)
-
     helper = 'git-cinnabar-helper'
     system = args.system
     machine = args.machine
@@ -136,11 +134,11 @@ def download(args):
 
     print('Downloading from %s...' % url)
     try:
-        reader = HTTPReader(url, args['disable-ssl'])
+        reader = HTTPReader(url, args.disable_ssl)
     except HTTPError:
         # Try again, just in case
         try:
-            reader = HTTPReader(url, args['disable-ssl'])
+            reader = HTTPReader(url, args.disable_ssl)
         except HTTPError as e:
             print('Download failed with status code %d\n' % e.code,
                   file=sys.stderr)
