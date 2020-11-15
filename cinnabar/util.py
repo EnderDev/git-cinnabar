@@ -643,7 +643,7 @@ class HTTPReader(object):
 
         ctx = ssl.create_default_context()
 
-        if secure == False:
+        if secure is False:
             ctx.check_hostname = False
             ctx.verify_mode = ssl.CERT_NONE
 
