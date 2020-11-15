@@ -639,7 +639,10 @@ class chunkbuffer(object):
 class HTTPReader(object):
     def __init__(self, url):
         url = fsdecode(url)
-        self.fh = urlopen(url)
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        self.fh = urlopen(url, context=ctx)
         # If the url was redirected, get the final url for possible future
         # range requests.
         self.url = self.fh.geturl()
