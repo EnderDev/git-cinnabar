@@ -6,6 +6,7 @@ import subprocess
 import sys
 import time
 import traceback
+import ssl
 try:
     from urllib2 import (
         Request,
