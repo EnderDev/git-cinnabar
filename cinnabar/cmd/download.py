@@ -33,6 +33,9 @@ except ImportError:
 @CLI.subcommand
 @CLI.argument('--url', action='store_true',
               help='only print the download url')
+@CLI.argument('--secure', nargs='?', metavar='VARIANT',
+              default=True,
+              help='use ssl when downloading helper')
 @CLI.argument('--dev', nargs='?', metavar='VARIANT',
               default=False,
               help='download the development helper')
@@ -132,11 +135,11 @@ def download(args):
 
     print('Downloading from %s...' % url)
     try:
-        reader = HTTPReader(url)
+        reader = HTTPReader(url, args.secure)
     except HTTPError:
         # Try again, just in case
         try:
-            reader = HTTPReader(url)
+            reader = HTTPReader(url, args.secure)
         except HTTPError as e:
             print('Download failed with status code %d\n' % e.code,
                   file=sys.stderr)
