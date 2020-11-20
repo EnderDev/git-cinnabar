@@ -1237,7 +1237,12 @@ def _get_repo(remote):
         try:
             repo = hg.peer(ui, {}, remote.url)
         except (error.RepoError, HTTPError, IOError):
-            return bundlerepo(remote.url, HTTPReader(remote.url))
+            disable_ssl = False
+
+            if sys.platform == 'win32':
+                disable_ssl = True
+
+            return bundlerepo(remote.url, HTTPReader(remote.url, disable_ssl=disable_ssl))
 
     assert repo.capable(b'getbundle')
 
