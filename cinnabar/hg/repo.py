@@ -754,7 +754,12 @@ def get_bundle(url):
         if not reader:
             BundleHelper.close()
     if not reader:
-        reader = HTTPReader(url)
+        disable_ssl = False
+
+        if sys.platform == 'win32':
+            disable_ssl = True
+
+        reader = HTTPReader(url, disable_ssl=disable_ssl)
     return unbundle_fh(reader, url)
 
 

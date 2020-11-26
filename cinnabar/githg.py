@@ -710,7 +710,12 @@ class GitHgStore(object):
         if not remote_refs and urlparse(git_repo_url).scheme in (b'http',
                                                                  b'https'):
             try:
-                bundle = HTTPReader(git_repo_url)
+                disable_ssl = False
+
+                if sys.platform == 'win32':
+                    disable_ssl = True
+
+                bundle = HTTPReader(git_repo_url, disable_ssl=disable_ssl)
             except URLError as e:
                 logging.error(e.reason)
                 return False
